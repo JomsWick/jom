@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import GradientText from "../GradientText";
 
 const LoadingScreen = ({ duration = 3000, onComplete }) => {
     const barRef = useRef(null);
@@ -44,17 +45,19 @@ const LoadingScreen = ({ duration = 3000, onComplete }) => {
             <div className="relative w-96 h-6 bg-gray-900 rounded-full overflow-hidden shadow-lg">
                 <div
                     ref={barRef}
-                    className="absolute h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-300 to-pink-300 shadow-xl transition-[width] duration-75"
+                    className="absolute h-full rounded-full bg-gradient-to-r from-[#3AB0A1] via-[#4DB6AC] to-[#2C8C84] shadow-xl transition-[width] duration-75"
                     style={{ width: "0%" }}
                 />
                 <div
                 ref={ballRef}
-                className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-blue-400 blur-md shadow-2xl"
+                className="absolute top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#3AB0A1] blur-md shadow-2xl"
                 style={{ left: "0%" }}
                 />
             </div>
-            <div className="mt-6 text-white font-semibold tracking-wide">
-                Please wait...
+            <div className="mt-6 font-semibold tracking-wide">
+                 <GradientText colors={["#3AB0A1","#4DB6AC","#2C8C84"]} animationSpeed={8} showBorder={false} className="text-xl font-bold custom-class">
+                    Please wait...
+                </GradientText>                
             </div>
         </div>
     );

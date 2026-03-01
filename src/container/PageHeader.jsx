@@ -16,8 +16,7 @@ const PageHeader = ({
 }) => {
     const confirmLogoutRef = useRef(null);
 
-    // Determine background and text colors
-    const headerBg = bgColor ?? (dark ? 'bg-transparent shadow-white/20' : 'bg-gray-50 shadow-xs');
+    const headerBg = bgColor ?? (dark ? 'bg-transparent border-b shadow-white/20' : 'bg-gray-50 shadow-xs');
     const headerText = textColor ?? (dark ? 'text-white' : 'text-slate-500');
     const subtitleText = dark ? 'text-gray-300' : 'text-slate-600';
 
