@@ -1,0 +1,120 @@
+[
+    {
+        "id": 1,
+        "avatar": "",
+        "firstname": "Jomel",
+        "middlename": "Aguimod",
+        "lastname": "Ang",
+        "birthdate": "1992-04-10",
+        "age": 33,
+        "gender": "male",
+        "address": "davao city",
+        "email": "jaang20@gmail.com",
+        "phone_number": "09561250706",
+        "civil_status": "single",
+        "nationality": "filipino",
+        "objectives": "",
+        "job_title": "software engineer",
+        "department": "IT",
+        "date_of_hire": "",
+        "employment_status": "",
+        "education": "",
+        "institution": "university of southeastern philippines",
+        "study": "mit",
+        "degree": "master",
+        "graduate_date": "",
+        "certificate": "",
+        "work_experience": {
+            "latest": {
+                "position": "Software Engineer",
+                "year": "2024-03-18 - 2027-03-18",
+                "company": "Global Telemedicine Corporation",
+                "description": ""
+            },
+            "recent": {
+                "position": "Technical Support",
+                "year": "2019-07-10 - 2023-07-23",
+                "company": "CIMEM Consumer Distributors",
+                "description": ""
+            },
+            "old": {
+                "position": "ICT Instructor",
+                "year": "2017-05-18 - 2018-04-08",
+                "company": "Kristy Dawn College of Davao, Inc.",
+                "description": ""
+            },
+            "older": {
+                "position": "Graphic Designer",
+                "year": "2017-05-18 - 2018-04-08",
+                "company": "Racks Garden Bar & Grill, Eudia Multimedia",
+                "description": ""
+            }
+        },
+        "contact_name": "",
+        "contact_address": "",
+        "contact_number": "",
+        "contact_relationship": "",
+        "employee_signature": "",
+        "employee_date": "",
+        "documentsRequired": 5,
+        "documentsSubmitted": 5,
+        "company": "",
+        "branch": "davao city",
+        "salary": 4000,
+        "work_type": "",
+        "position": "Full Stack Developer",
+        "latestSalary": 5000,
+        "benefits": {            
+            "healthInsurance": {
+                "provider": "iCare",
+                "plan": "Gold Plan",
+                "memberId": "iCare-123456",
+                "cardNumber": "CARD-987654",
+                "status": "Active"
+            },
+            "sss": {
+                "ssNumber": "34-5678901-2",
+                "status": "Active"
+            },
+            "philhealth": {
+                "philhealthNumber": "12-345678901-2",
+                "barcodeNumber": "8-A-888-888-8888-88",
+                "status": "Active"
+            },
+            "pagibig": {
+                "pagibigNumber": "1234-5678-9012",
+                "barcodeNumber": "8-A-888-888-8888-88",
+                "status": "Active"
+            },
+            "tin": {
+                "tinNumber": "123-456-789-000",
+                "status": "Registered"
+            },
+            "bank": {
+                "bankName": "HelloMoney AUB",
+                "accountId": "001234567890",
+                "cardNumber": "4111-XXXX-XXXX-1234"
+            }
+        },
+        "incentiveType": "Performance Bonus",
+        "incentiveAmount": 1000,
+        "salaryStatus": "deposited",
+        "hmoProvider": "iCare",
+        "hmoPlan": { "name": "Gold Plan" },
+        "dependents": [
+            { "name": "Maria Dela Cruz" }
+        ],
+        "companyShare": 2500,
+        "employeeShare": 500,
+        "hmoStatus": "Active",
+        "request": {
+            "type": "leave",
+            "status": "pending",
+            "from": "2026-02-20",
+            "to": "2026-02-21",
+            "reason": "Family Trip",
+            "rejectionReason": ""
+        },
+        "requests": []
+    }
+]
