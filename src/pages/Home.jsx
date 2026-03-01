@@ -67,9 +67,9 @@ const Home = ({ dark }) => {
                             className="w-full"
                             textColor="text-teal-600"
                         />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 p-5">
-                            <div className="sm:col-span-2 lg:col-span-3">
-                                <div className="ml-32 sm:ml-0" style={{ height: '600px', position: 'relative', top: '-20px' }}>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 mx-8 gap-4 p-5 range-lg:grid-cols-10">
+                            <div className="sm:col-span-1 md:col-span-2 lg:col-span-3">
+                                <div className="ml-0 sm:ml-4 md:ml-8 lg:ml-32" style={{ height: '600px', position: 'relative', top: '-20px' }}>
                                     <ReflectiveCard
                                         overlayColor="rgba(0, 128, 128, 0.5)"
                                         blurStrength={12}
@@ -86,10 +86,10 @@ const Home = ({ dark }) => {
                                     />
                                 </div>                                
                             </div>
-                            <div className="sm:col-span-2 lg:col-span-9 mt-14">
+                            <div className="sm:col-span-2 md:col-span-6 lg:col-span-9 mt-14">
                                 <TabGroup
-                                    tabClassName="py-3 border-b shadow-xs text-sm sm:text-base ml-6 lg:text-lg"
-                                    contentClassName="max-h-[unset] sm:ml-6"
+                                    tabClassName="py-3 border-b shadow-xs text-sm sm:text-base lg:text-lg sm:ml-0 lg:ml-6"
+                                    contentClassName="max-h-[unset] sm:ml-0 lg:ml-6"
                                     contents={[
                                         { title: <MenuTitle src={FileIcon}>Overview</MenuTitle>, content: <Overview data={data} loading={!data} /> },
                                         { title: <MenuTitle src={UserIcon}>Profile</MenuTitle>, content: <Profile data={data} loading={!data} /> },
