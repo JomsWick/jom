@@ -163,7 +163,7 @@ const ReflectiveCard = ({
         <div className="flex justify-between items-end border-t border-white/20 pt-6">
           <div className="flex flex-col gap-1">
             <span className="text-[9px] tracking-[0.1em] opacity-60">ID NUMBER</span>
-            <span className="font-mono text-sm tracking-[0.05em]">8901-2345-6789</span>
+            <span className="font-mono text-sm tracking-[0.05em]">2026-0302-0310</span>
           </div>
           <div className="opacity-40">
             <Fingerprint size={32} />

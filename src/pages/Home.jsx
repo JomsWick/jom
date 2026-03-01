@@ -42,7 +42,7 @@ const Home = ({ dark }) => {
 
 
     return (
-        <div className={`relative w-full h-screen ${dark ? "bg-black" : "bg-white"}`}>
+        <div className={`relative w-full h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
             <LiquidEtherWrapper dark={dark} />
             <CoverPage
                 background={coverImg}
@@ -67,27 +67,29 @@ const Home = ({ dark }) => {
                             className="w-full"
                             textColor="text-teal-600"
                         />
-                        <div className="flex items-start space-x-6 gap-8">
-                            <div className="ml-32" style={{ height: '600px', position: 'relative', top: '-20px' }}>
-                                <ReflectiveCard
-                                    overlayColor="rgba(0, 128, 128, 0.5)"
-                                    blurStrength={12}
-                                    glassDistortion={30}
-                                    metalness={1}
-                                    roughness={0.75}
-                                    displacementStrength={20}
-                                    noiseScale={1}
-                                    specularConstant={5}
-                                    grayscale={0.15}
-                                    color="#ffffff"
-                                    profilePicture={ProfileImg}
-                                    disableCamera={true}
-                                />
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 p-5">
+                            <div className="sm:col-span-2 lg:col-span-3">
+                                <div className="ml-32 sm:ml-0" style={{ height: '600px', position: 'relative', top: '-20px' }}>
+                                    <ReflectiveCard
+                                        overlayColor="rgba(0, 128, 128, 0.5)"
+                                        blurStrength={12}
+                                        glassDistortion={30}
+                                        metalness={1}
+                                        roughness={0.75}
+                                        displacementStrength={20}
+                                        noiseScale={1}
+                                        specularConstant={5}
+                                        grayscale={0.15}
+                                        color="#ffffff"
+                                        profilePicture={ProfileImg}
+                                        disableCamera={true}
+                                    />
+                                </div>                                
                             </div>
-                            <div className="absolute top-20 left-112">
+                            <div className="sm:col-span-2 lg:col-span-9 mt-14">
                                 <TabGroup
-                                    tabClassName="py-3 border-b shadow-xs"
-                                    contentClassName="max-h-[unset]"
+                                    tabClassName="py-3 border-b shadow-xs text-sm sm:text-base ml-6 lg:text-lg"
+                                    contentClassName="max-h-[unset] sm:ml-6"
                                     contents={[
                                         { title: <MenuTitle src={FileIcon}>Overview</MenuTitle>, content: <Overview data={data} loading={!data} /> },
                                         { title: <MenuTitle src={UserIcon}>Profile</MenuTitle>, content: <Profile data={data} loading={!data} /> },
@@ -99,13 +101,6 @@ const Home = ({ dark }) => {
                                 />
                             </div>
                         </div>
-                        {data?.map(profile => (
-                            <div key={profile.id} className="mt-2">
-                                <h2>{profile.firstname} {profile.lastname}</h2>
-                                <p>Email: {profile.email}</p>
-                                <p>Position: {profile.position}</p>
-                            </div>
-                        ))}
                     </div>
                 </ClickSpark>
             </div>
