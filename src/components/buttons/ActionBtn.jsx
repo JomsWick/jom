@@ -15,14 +15,16 @@ const ActionBtn = (props) => {
 
     const renderSize = () => {
         switch (size) {
-        case "xs": return "py-[2px] text-[10px] px-2";
-        case "sm": return "py-1 text-xs px-2";
-        case "md": return "py-2 text-sm px-4";
-        case "lg": return "py-3 text-sm px-6";
-        case "xl": return "py-4 text-sm px-8";
-        case "2xl": return "py-5 text-lg px-10";
-        case "3xl": return "py-6 text-lg px-12";
-        default: return "py-3 px-2";
+            case "sm":
+            return "py-1 text-xs sm:text-sm px-2 sm:px-3";
+            case "md":
+            return "py-1.5 sm:py-2 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-5";
+            case "lg":
+            return "py-2 sm:py-3 text-sm sm:text-base md:text-lg px-4 sm:px-6";
+            case "xl":
+            return "py-3 sm:py-4 text-base sm:text-lg px-6 sm:px-8";
+            default:
+            return "py-2 text-sm px-4";
         }
     };
 
@@ -49,7 +51,7 @@ const ActionBtn = (props) => {
             switch (type) {
                 case "primary": return `bg-primary-dark border-2 border-blue-600 hover:bg-primary-darker focus:bg-primary-dark text-white ${disabledClass}`;
                 case "secondary": return `bg-indigo-700 border-2 border-indigo-700  hover:bg-indigo-900 focus:bg-indigo-900 text-white ${disabledClass}`;
-                case "teal": return `bg-teal-900 border-2 border-teal-900 hover:bg-teal-700 focus:bg-teal-700 text-white ${disabledClass}`;
+                case "teal": return `bg-teal-900 border-2 border-teal-900 hover:bg-teal-700 hover:border-teal-700 focus:bg-teal-700 text-white ${disabledClass}`;
                 case "blue-green": return `bg-[#009688] border-2 border-teal-900 hover:bg-[#00796b] focus:bg-[#00796b] text-white ${disabledClass}`;
                 case "indigo": return `bg-indigo-800 border-2 border-indigo-800  hover:bg-indigo-900 focus:bg-indigo-900 text-white ${disabledClass}`;
                 case "primary-dark": return `bg-primary-darker hover:bg-blue-700 focus:bg-blue-700 text-white ${disabledClass}`;

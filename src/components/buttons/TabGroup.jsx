@@ -123,7 +123,7 @@ const TabGroup = ({
 							selectedIndex == i ? "selected" : ""
 						}
 						as="div"
-						className={`p-3 duration-200 text-base rounded-xl flex flex-col  overflow-auto ${contentClassName} ${
+						className={`p-3 duration-200 text-base rounded-xl flex flex-col overflow-auto scrollbar-auto-hide ${contentClassName} ${
 							contentClassName.includes("max-h")
 								? ""
 								: "max-h-[calc(100vh-300px)] min-h-72"

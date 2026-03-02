@@ -4,6 +4,32 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+.scrollbar-auto-hide::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-auto-hide::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-auto-hide::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.scrollbar-auto-hide.scrolling::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+}
+
+.scrollbar-auto-hide {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.05) transparent;
+}
+
+.scrollbar-auto-hide.scrolling {
+  scrollbar-color: rgba(0,0,0,0.1) transparent;
+}
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

@@ -19,7 +19,7 @@ const ReflectiveCard = ({
 }) => {
   const videoRef = useRef(null);
 
-  const streamRef = useRef(null);  // Track the webcam stream
+  const streamRef = useRef(null);
 
   useEffect(() => {
     const startWebcam = async () => {

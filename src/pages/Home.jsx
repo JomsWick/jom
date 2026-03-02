@@ -20,13 +20,26 @@ import UserIcon from '../assets/icons/user.png';
 import EducationIcon from '../assets/icons/mortarboard.png';
 import ExperienceIcon from '../assets/icons/user-experience.png';
 import PortfolioIcon from '../assets/icons/portfolio.png';
-import ReflectiveCard from '@/components/ReflectiveCard';
 import ProfileImg from "../assets/images/profile-img.png"
+import ProfileCard from '@/components/cards/ProfileCard';
+import { fetchProfiles } from '@/libs/api/profileApi';
+import { calculateAge, capitalizeName, capitalizePreposition, completeAddress, fullNameWithInitial } from '@/libs/helpers';
+import SkillsCard from '@/components/cards/SkillsCard';
+import ActionBtn from '@/components/buttons/ActionBtn';
 
 const Home = ({ dark }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [disableCamera, setDisableCamera] = useState(false);
+    
+    const [profiles, setProfiles] = useState([]);
+
+    useEffect(() => {
+        fetchProfiles().then((data) => {
+        setProfiles(data);
+        setLoading(false);
+        });
+    }, []);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), 3000);
@@ -42,16 +55,16 @@ const Home = ({ dark }) => {
 
 
     return (
-        <div className={`relative w-full h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
+        <div className={`relative w-full min-h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
             <LiquidEtherWrapper dark={dark} />
             <CoverPage
                 background={coverImg}
-                minHeight="min-h-[20vh]"
+                minHeight="min-h-[16vh] sm:min-h-[18vh] md:min-h-[21vh]"
                 overlayColor="bg-transparent"
-                className={`${dark ? "opacity-45" : "opacity-100"} top-20`}
+                className={`${dark ? "opacity-45" : "opacity-100"}`}
             />
 
-            <div className="relative z-10 text-black dark:text-white overflow-visible">
+            <div className="relative z-10 text-black dark:text-white">
                 <ClickSpark
                     sparkColor="#fff"
                     sparkSize={10}
@@ -59,39 +72,63 @@ const Home = ({ dark }) => {
                     sparkCount={8}
                     duration={400}
                 >
-                    <div className="w-full dark:bg-transparent rounded-lg">
+                    <div className="w-full">
                         <PageHeader
                             logo={dark ? LogoDark : LogoLight}
                             title="My Profile"
                             dark={dark}
                             className="w-full"
-                            textColor="text-teal-600"
                         />
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 mx-8 gap-4 p-5 range-lg:grid-cols-10">
-                            <div className="sm:col-span-1 md:col-span-2 lg:col-span-3">
-                                <div className="ml-0 sm:ml-4 md:ml-8 lg:ml-32" style={{ height: '600px', position: 'relative', top: '-20px' }}>
-                                    <ReflectiveCard
-                                        overlayColor="rgba(0, 128, 128, 0.5)"
-                                        blurStrength={12}
-                                        glassDistortion={30}
-                                        metalness={1}
-                                        roughness={0.75}
-                                        displacementStrength={20}
-                                        noiseScale={1}
-                                        specularConstant={5}
-                                        grayscale={0.15}
-                                        color="#ffffff"
-                                        profilePicture={ProfileImg}
-                                        disableCamera={true}
-                                    />
-                                </div>                                
+
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-12">
+                            <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-start lg:ml-6 xl:ml-12">
+                                <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                                    {profiles.map(profile => (
+                                        <div key={profile.id} className="mb-4 flex flex-col items-center gap-4">
+                                            <ProfileCard
+                                                profile={{
+                                                    profilePicture: profile.avatar || ProfileImg,
+                                                    name: fullNameWithInitial(profile.firstname, profile.middlename, profile.lastname),
+                                                    age: calculateAge(profile.birthdate),
+                                                    position: capitalizeName(profile.job_title),
+                                                    location: completeAddress(profile.address),
+                                                    social: {
+                                                        linkedin: 'https://www.linkedin.com/in/jomswick/',
+                                                        github: 'https://github.com/JomsWick',
+                                                        discord: 'https://discord.com/users/538617488439771146'
+                                                    }
+                                                }}
+                                                dark={dark}
+                                            />
+
+                                            <SkillsCard skills={profile.skills} dark={dark} />
+                                            <div className="w-full flex justify-center">
+                                                <ActionBtn
+                                                    type="teal"
+                                                    dark={dark}
+                                                    className="
+                                                        w-full
+                                                        sm:w-[82%]
+                                                        md:w-[95%]
+                                                        lg:w-[82%]
+                                                        xl:w-[82%] 
+                                                        text-xs sm:text-sm px-3 sm:px-5 py-2
+                                                    "
+                                                >
+                                                    Hire Me
+                                                </ActionBtn>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="sm:col-span-2 md:col-span-6 lg:col-span-9 mt-14">
+
+                            <div className="md:col-span-8 lg:col-span-9">
                                 <TabGroup
-                                    tabClassName="py-3 border-b shadow-xs text-sm sm:text-base lg:text-lg sm:ml-0 lg:ml-6"
-                                    contentClassName="max-h-[unset] sm:ml-0 lg:ml-6"
+                                    tabClassName="py-3 border-b text-xs sm:text-sm md:text-base lg:text-lg"
+                                    contentClassName=""
                                     contents={[
-                                        { title: <MenuTitle src={FileIcon}>Overview</MenuTitle>, content: <Overview data={data} loading={!data} /> },
+                                        { title: <MenuTitle src={FileIcon}>Overview</MenuTitle>, content: <Overview data={data} loading={!data} dark={dark} /> },
                                         { title: <MenuTitle src={UserIcon}>Profile</MenuTitle>, content: <Profile data={data} loading={!data} /> },
                                         { title: <MenuTitle src={EducationIcon}>Education</MenuTitle>, content: <Education data={data} loading={!data} /> },
                                         { title: <MenuTitle src={ExperienceIcon}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} /> },
