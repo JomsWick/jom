@@ -15,47 +15,44 @@ import Profile from './profile-tab/Profile';
 import Education from './profile-tab/Education';
 import Experience from './profile-tab/Experience';
 import Portfolio from './profile-tab/Portfolio';
-import FileIcon from '../assets/icons/file.png';
-import UserIcon from '../assets/icons/user.png';
-import EducationIcon from '../assets/icons/mortarboard.png';
-import ExperienceIcon from '../assets/icons/user-experience.png';
-import PortfolioIcon from '../assets/icons/portfolio.png';
 import ProfileImg from "../assets/images/profile-img.png"
 import ProfileCard from '@/components/cards/ProfileCard';
 import { fetchProfiles } from '@/libs/api/profileApi';
-import { calculateAge, capitalizeName, capitalizePreposition, completeAddress, fullNameWithInitial } from '@/libs/helpers';
+import { calculateAge, capitalizeName, completeAddress, fullNameWithInitial } from '@/libs/helpers';
 import SkillsCard from '@/components/cards/SkillsCard';
 import ActionBtn from '@/components/buttons/ActionBtn';
+import AppLayout from '@/container/AppLayout';
+import { FaBriefcase, FaGraduationCap, FaRegFileAlt, FaRegImages, FaRegUser } from 'react-icons/fa';
+import Footer from '@/container/Footer';
 
 const Home = ({ dark }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [disableCamera, setDisableCamera] = useState(false);
     
     const [profiles, setProfiles] = useState([]);
 
     useEffect(() => {
-        fetchProfiles().then((data) => {
-        setProfiles(data);
-        setLoading(false);
-        });
-    }, []);
+        const loadProfiles = async () => {
+            try {
+                const data = await fetchProfiles();
+                setProfiles(data);
+            } catch (error) {
+                console.error("Failed to fetch profiles:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    useEffect(() => {
-        setTimeout(() => setLoading(false), 3000);
+        loadProfiles();
     }, []);
 
     if (loading) return <LoadingScreen />;
 
     const coverImg = dark ? coverDark : coverLight;
 
-    const toggleCamera = () => {
-        setDisableCamera(prevState => !prevState);
-    };
-
-
     return (
-        <div className={`relative w-full min-h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
+        <AppLayout disableContainer disablePadding>
+            <div className={`relative w-full min-h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
             <LiquidEtherWrapper dark={dark} />
             <CoverPage
                 background={coverImg}
@@ -110,8 +107,10 @@ const Home = ({ dark }) => {
                                                         w-full
                                                         sm:w-[82%]
                                                         md:w-[95%]
-                                                        lg:w-[82%]
-                                                        xl:w-[82%] 
+                                                        lg:w-[95%]
+                                                        xl:w-[90%]
+                                                        2xl:w-[74%]
+                                                        3xl:w-[85%]
                                                         text-xs sm:text-sm px-3 sm:px-5 py-2
                                                     "
                                                 >
@@ -123,25 +122,27 @@ const Home = ({ dark }) => {
                                 </div>
                             </div>
 
-                            <div className="md:col-span-8 lg:col-span-9">
+                            <div className="md:col-span-8 lg:col-span-9 mb-4">
                                 <TabGroup
                                     tabClassName="py-3 border-b text-xs sm:text-sm md:text-base lg:text-lg"
                                     contentClassName=""
                                     contents={[
-                                        { title: <MenuTitle src={FileIcon}>Overview</MenuTitle>, content: <Overview data={data} loading={!data} dark={dark} /> },
-                                        { title: <MenuTitle src={UserIcon}>Profile</MenuTitle>, content: <Profile data={data} loading={!data} /> },
-                                        { title: <MenuTitle src={EducationIcon}>Education</MenuTitle>, content: <Education data={data} loading={!data} /> },
-                                        { title: <MenuTitle src={ExperienceIcon}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} /> },
-                                        { title: <MenuTitle src={PortfolioIcon}>Portfolio</MenuTitle>, content: <Portfolio data={data} loading={!data} /> },
+                                        { title: <MenuTitle icon={FaRegFileAlt}>Overview</MenuTitle>, content: <Overview profile={profiles[0]} dark={dark} /> },
+                                        { title: <MenuTitle icon={FaRegUser}>Profile</MenuTitle>, content: <Profile profile={profiles[0]} dark={dark} /> },
+                                        { title: <MenuTitle icon={FaGraduationCap}>Education</MenuTitle>, content: <Education data={data} dark={dark} loading={!data} /> },
+                                        { title: <MenuTitle icon={FaBriefcase}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} dark={dark} /> },
+                                        { title: <MenuTitle icon={FaRegImages}>Portfolio</MenuTitle>, content: <Portfolio data={data} loading={!data} dark={dark} /> },
                                     ]}
                                     dark={dark}
                                 />
                             </div>
                         </div>
+                        <Footer profile={profiles[0]} dark={dark} />
                     </div>
                 </ClickSpark>
             </div>
         </div>
+        </AppLayout>
     );
 };
 

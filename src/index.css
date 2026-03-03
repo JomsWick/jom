@@ -23,7 +23,8 @@
 }
 
 .scrollbar-auto-hide {
-  scrollbar-width: thin;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   scrollbar-color: rgba(0,0,0,0.05) transparent;
 }
 

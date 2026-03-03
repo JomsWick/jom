@@ -1,5 +1,6 @@
 const MenuTitle = ({
 	src,
+	icon: Icon,
 	children,
 	className = "",
 	dark = false,
@@ -14,17 +15,28 @@ const MenuTitle = ({
 				${className}
 			`}
 			>
-			<img
-				src={src}
-				alt=""
-				className={`
-				h-4 sm:h-5 md:h-6
-				object-contain
-				transition duration-200
-				${selected ? "opacity-100" : "opacity-70"}
-				${dark && !selected ? "invert" : ""}
-				`}
-			/>
+			{Icon ? (
+				<Icon
+					className={`
+						h-4 sm:h-5 md:h-6
+						transition duration-200
+						${selected ? "opacity-100" : "opacity-70"}
+						${dark && !selected ? "text-slate-800 dark:text-teal-600" : "text-gray-500 dark:text-slate-300"}
+					`}
+				/>
+			) : src ? (
+				<img
+					src={src}
+					alt=""
+					className={`
+						h-4 sm:h-5 md:h-6
+						object-contain
+						transition duration-200
+						${selected ? "opacity-100" : "opacity-70"}
+						${dark && !selected ? "invert" : ""}
+					`}
+				/>
+			) : null}
 
 			<span className="
 				text-[10px]

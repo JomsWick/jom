@@ -1,11 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { Fade } from "react-awesome-reveal";
 import FlatIcon from "../icons/FlatIcon";
 import { Tab } from "@headlessui/react";
+import { useScreenSize } from "@/hooks/useScreenSize";
 
-const LeftArrow = ({ className, dark }) => {
+const LeftArrow = ({ className, dark, visible }) => {
 	const { isFirstItemVisible, scrollPrev } =
 		React.useContext(VisibilityContext);
 
@@ -16,36 +17,48 @@ const LeftArrow = ({ className, dark }) => {
 				? className
 				: "h-full flex items-center px-3 duration-200 border-r cursor-pointer absolute top-0 z-10"
 			} ${dark ? "bg-transparent border border-transparent" : "bg-transparent border border-transparent"}`}
-			disabled={isFirstItemVisible}
+			// disabled={isFirstItemVisible}
+			style={{
+				opacity: isFirstItemVisible ? 0.2 : 1,
+				pointerEvents: "auto",
+				transition: "opacity 0.3s ease",
+			}}
 			onClick={() => scrollPrev()}
 		>
 			<FlatIcon
 				icon="rr-angle-circle-left"
 				className={`text-lg ${
-					isFirstItemVisible ? " opacity-10" : " opacity-100 "
+					isFirstItemVisible ? "opacity-10" : "opacity-100"} ${
+					dark ? "text-teal-500" : "text-slate-400"
 				}`}
 			/>
 		</div>
 	);
 };
 
-const RightArrow = ({ className, dark }) => {
+const RightArrow = ({ className, dark, visible }) => {
 	const { isLastItemVisible, scrollNext } =
 		React.useContext(VisibilityContext);
 
 	return (
 		<div
 			className={`${
-	className
-		? className
-		: "h-full flex items-center px-3 duration-200 border-l cursor-pointer absolute top-0 right-0 z-10"
-} ${dark ? "bg-transparent border border-transparent" : "bg-transparent border border-transparent"}`}
+				className
+					? className
+					: "h-full flex items-center px-3 duration-200 border-l cursor-pointer absolute top-0 right-0 z-10"
+			} ${dark ? "bg-transparent border border-transparent" : "bg-transparent border border-transparent"}`}
+			style={{
+				opacity: isLastItemVisible ? 0.2 : 1,
+				pointerEvents: "auto",
+				transition: "opacity 0.3s ease",
+			}}
 			onClick={() => scrollNext()}
 		>
 			<FlatIcon
 				icon="rr-angle-circle-right"
 				className={`text-lg ${
-					isLastItemVisible ? " opacity-10" : " opacity-100"
+					isLastItemVisible ? "opacity-10" : "opacity-100"} ${
+					dark ? "text-teal-500" : "text-slate-400"
 				}`}
 			/>
 		</div>
@@ -62,13 +75,67 @@ const TabGroup = ({
 	dark = false,
 }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
+  	const [hovering, setHovering] = useState(false);
+	const { isMobile } = useScreenSize();
+	const [focused, setFocused] = useState(false);
+  	const timeoutRef = useRef(null)
+	const showArrows = !isMobile && (hovering || focused);
+
+	const triggerArrows = () => {
+		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+		timeoutRef.current = setTimeout(() => {
+			setHovering(false);
+			setFocused(false);
+		}, 3000);
+	};
+
 	return (
 		<Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-			<Tab.List as="div" className={`relative ${tabClassName}`}>
+			<Tab.List
+				as="div"
+				className={`relative ${tabClassName}`}
+				onMouseEnter={() => {
+					setHovering(true);
+					triggerArrows();
+				}}
+				onMouseLeave={triggerArrows}
+				onMouseMove={triggerArrows}
+				onTouchStart={triggerArrows}
+				onFocus={() => {
+					setFocused(true);
+					triggerArrows();
+				}}
+				onBlur={triggerArrows}
+			>
 				<ScrollMenu
-					LeftArrow={(props) => <LeftArrow {...props} dark={dark} />}
-					RightArrow={(props) => <RightArrow {...props} dark={dark} />}
-					scrollContainerClassName={`px-[60px] gap-2 overflow-x-hidden ${scrollContainerClassName}`}
+					LeftArrow={(props) => (
+						<div
+							style={{
+								opacity: isMobile ? 0 : showArrows ? 1 : 0.5,
+								pointerEvents: isMobile ? "none" : "auto",
+								transition: "opacity 0.3s ease",
+							}}
+						>
+							<LeftArrow {...props} dark={dark} />
+						</div>
+					)}
+					RightArrow={(props) => (
+						<div
+							style={{
+								opacity: isMobile ? 0 : showArrows ? 1 : 0.5,
+								pointerEvents: isMobile ? "none" : "auto",
+								transition: "opacity 0.3s ease",
+							}}
+						>
+							<RightArrow {...props} dark={dark} />
+						</div>
+					)}
+					scrollContainerClassName={`
+						overflow-x-auto scrollbar-auto-hide 
+						${isMobile ? "gap-2 pl-4 pr-4 snap-x snap-mandatory" : "overflow-x-hidden px-[60px] gap-4"}
+						${scrollContainerClassName}
+					`}
 				>
 					{contents.map(({ title, i }, index) => (
 						<Tab
@@ -79,33 +146,26 @@ const TabGroup = ({
 							{({ selected }) => (
 								<div
 									className={`outline-0 relative px-3 py-2 mx-0 flex gap-2 items-center justify-center rounded-lg cursor-pointer duration-200
-										${
-											dark
-											? selected
-											? "bg-teal-600 text-white border border-teal-500"
-											: "bg-transparent text-teal-300 border border-teal-500 hover:bg-teal-700/20"
-											: selected
-											? "bg-transparent text-primary"
-											: "bg-white text-gray-700 hover:bg-transparent"
-										}
-									`}
+										border-2
+										${dark
+										? selected
+											? "bg-teal-600 text-white border-teal-600"
+											: "bg-transparent text-teal-600 border-teal-600 hover:bg-teal-700/20"
+										: selected
+											? "bg-transparent text-primary border-transparent"
+											: "bg-white text-gray-700 border-transparent hover:bg-transparent"
+										} ${isMobile ? "snap-start" : ""}`}
 								>
-									{typeof title == "function"
-										? title({
-												selectedIndex: selectedIndex,
-												setSelectedIndex:
-													setSelectedIndex,
-										  })
+									{typeof title === "function"
+										? title({ selectedIndex, setSelectedIndex })
 										: React.cloneElement(title, { selected, dark })
 									}
-									{!dark && selected && (
+
+									{!dark && (
 										<div
-											className="absolute bottom-0 left-0 w-full h-0.5 transition-all duration-500"
-											style={{
-												backgroundImage: "linear-gradient(to right, #14b8a6, #14b8a6)",
-												animation: "underlineGrow 0.3s forwards",
-												transition: "animation 0.3s ease",
-											}}
+											className={`absolute bottom-0 left-0 h-0.5 bg-teal-500 origin-left
+											transition-all duration-300 ease-out
+											${selected ? "w-full opacity-100" : "w-0 opacity-0"}`}
 										/>
 									)}
 								</div>

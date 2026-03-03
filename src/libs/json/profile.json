@@ -38,6 +38,36 @@
         "degree": "master",
         "graduate_date": "",
         "certificate": "",
+        "about_me": "I am a Software Engineer who finds joy in crafting robust, efficient solutions that simplify complexity. I focus on building software that adapts seamlessly and scales gracefully, aiming for long-term impact rather than quick fixes.",
+        "inspire": "The thrill of solving puzzles and creating tools that genuinely improve lives keeps me motivated. Every line of code I write is a step toward smarter, more intuitive technology.",
+        "work_best": "I thrive in collaborative environments where ideas flow freely and respect is mutual. Guided by curiosity and a thoughtful approach, I enjoy turning challenges into elegant, reliable solutions.",
+        "personality": "I am naturally analytical and strategic, with a passion for continuous learning. This mindset helps me solve problems methodically while staying open to new ideas and innovations.",
+        "mbti": "intj-t",
+        "extras": {
+            "availability": "Mon–Fri, 8AM–5PM (GMT+8) • Open for freelance & full-time projects",
+            "talents": [
+                "Problem-solving & Logical Thinking",
+                "Team Collaboration",
+                "Mentorship & Learning",
+                "Creative Thinking"
+            ],
+            "hobbies": [
+                "Chess & Strategy Games",
+                "Photography",
+                "Traveling",
+                "Reading Tech Blogs"
+            ],
+            "sports": [
+                "Basketball",
+                "Billiard",
+                "Dart"
+            ],
+            "funFacts": [
+                "Coffee enthusiast",
+                "Always curious about AI and new tech",
+                "Loves puzzle-solving challenges"
+            ]
+        },
         "work_experience": {
             "latest": {
                 "position": "Software Engineer",
@@ -134,6 +164,7 @@
             "reason": "Family Trip",
             "rejectionReason": ""
         },
+        "project": "My Profile",
         "requests": []
     }
 ]
