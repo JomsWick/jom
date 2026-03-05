@@ -44,12 +44,16 @@
         "personality": "I am naturally analytical and strategic, with a passion for continuous learning. This mindset helps me solve problems methodically while staying open to new ideas and innovations.",
         "mbti": "intj-t",
         "extras": {
-            "availability": "Mon–Fri, 8AM–5PM (GMT+8) • Open for freelance & full-time projects",
+            "availability": {
+                "availabilityText": "I’m available on weekdays from 9am to 5pm",
+                "availabilityDays": ["2026-03-06", "2026-03-07", "2026-03-10"],
+                "availabilityDetails": "Mon–Fri, 8AM–5PM (GMT+8) • Open for freelance & full-time projects"
+            },
             "talents": [
-                "Problem-solving & Logical Thinking",
-                "Team Collaboration",
-                "Mentorship & Learning",
-                "Creative Thinking"
+                { "name": "Problem-solving & Logical Thinking", "level": 90 },
+                { "name": "Team Collaboration", "level": 80 },
+                { "name": "Mentorship & Learning", "level": 75},
+                { "name": "Creative Thinking", "level": 92 }
             ],
             "hobbies": [
                 "Chess & Strategy Games",

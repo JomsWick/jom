@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaDiscord } from 'react-icons/fa';
+import SocialIcon from '../icons/SocialIcon';
 
 const ProfileCard = ({ profile, dark }) => {
     const {
@@ -19,12 +20,23 @@ const ProfileCard = ({ profile, dark }) => {
             transition-colors duration-300
             ${dark ? 'bg-gray-900/50 text-white shadow-xl' : 'bg-white text-gray-800 shadow-lg'}`}
         >
-            <img
-                src={profilePicture}
-                alt={name}
-                className={`w-28 h-28 rounded-full object-cover border-4 mb-4
-                ${dark ? 'border-teal-500/70' : 'border-teal-600/70'}`}
-            />
+            <div className="relative w-28 h-28 mb-4 rounded-full p-0.75">
+                <div
+                    className="absolute inset-0 rounded-full animate-spin-slow"
+                    style={{
+                    background: dark
+                        ? 'conic-gradient(from 0deg, #2dd4bf, #14b8a6, #0f766e, #2dd4bf)'
+                        : 'conic-gradient(from 0deg, #5eead4, #14b8a6, #0f766e, #5eead4)',
+                    }}
+                />
+                <div className={`absolute inset-0.75 rounded-full overflow-hidden ${dark ? 'bg-gray-900' : 'bg-white'}`}>
+                    <img
+                        src={profilePicture}
+                        alt={name}
+                        className="w-full h-full object-cover rounded-full"
+                    />
+                </div>
+            </div>
 
             <h2 className={`text-xl font-semibold mb-1 ${dark ? 'text-white' : 'text-gray-800'}`}>
                 {name} {age && <span className={`text-sm ${dark ? 'text-gray-300' : 'text-gray-500'}`}>({age})</span>}
@@ -64,38 +76,31 @@ const ProfileCard = ({ profile, dark }) => {
                     </div>
                 )}
                 {social?.linkedin && (
-                    <a
-                        href={social.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-2xl transition-transform duration-200 transform hover:scale-120 hover:text-teal-400`}
-                        style={{ color: dark ? '#4fd1c5' : '#38b2ac' }}
-                    >
-                        <FaLinkedin />
-                    </a>
-                )}
-                {social?.github && (
-                    <a
-                        href={social.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-2xl transition-transform duration-200 transform hover:scale-120 hover:text-teal-400`}
-                        style={{ color: dark ? '#4fd1c5' : '#38b2ac' }}
-                    >
-                        <FaGithub />
-                    </a>
-                )}
-                {social?.discord && (
-                    <a
-                        href={social.discord}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-2xl transition-transform duration-200 transform hover:scale-120 hover:text-teal-400`}
-                        style={{ color: dark ? '#4fd1c5' : '#38b2ac' }}
-                    >
-                        <FaDiscord />
-                    </a>
-                )}
+        <SocialIcon
+            href={social.linkedin}
+            label="LinkedIn"
+            Icon={FaLinkedin}
+            dark={dark}
+        />
+    )}
+
+    {social?.github && (
+        <SocialIcon
+            href={social.github}
+            label="GitHub"
+            Icon={FaGithub}
+            dark={dark}
+        />
+    )}
+
+    {social?.discord && (
+        <SocialIcon
+            href={social.discord}
+            label="Discord"
+            Icon={FaDiscord}
+            dark={dark}
+        />
+    )}
             </div>
         </div>
     );

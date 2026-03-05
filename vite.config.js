@@ -7,6 +7,9 @@ import path from 'path';
 export default defineConfig({
   base: '/jom/',
   plugins: [react(), tailwindcss(),],
+  optimizeDeps: {
+    include: ['gsap'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

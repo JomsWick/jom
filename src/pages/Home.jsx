@@ -53,95 +53,96 @@ const Home = ({ dark }) => {
     return (
         <AppLayout disableContainer disablePadding>
             <div className={`relative w-full min-h-screen overflow-hidden ${dark ? "bg-black" : "bg-white"}`}>
-            <LiquidEtherWrapper dark={dark} />
-            <CoverPage
-                background={coverImg}
-                minHeight="min-h-[16vh] sm:min-h-[18vh] md:min-h-[21vh]"
-                overlayColor="bg-transparent"
-                className={`${dark ? "opacity-45" : "opacity-100"}`}
-            />
+                <LiquidEtherWrapper dark={dark} />
+                <CoverPage
+                    background={coverImg}
+                    minHeight="min-h-[16vh] sm:min-h-[18vh] md:min-h-[21vh]"
+                    overlayColor="bg-transparent"
+                    className={`${dark ? "opacity-45" : "opacity-100"}`}
+                />
 
-            <div className="relative z-10 text-black dark:text-white">
-                <ClickSpark
-                    sparkColor="#fff"
-                    sparkSize={10}
-                    sparkRadius={15}
-                    sparkCount={8}
-                    duration={400}
-                >
-                    <div className="w-full">
-                        <PageHeader
-                            logo={dark ? LogoDark : LogoLight}
-                            title="My Profile"
-                            dark={dark}
-                            className="w-full"
-                        />
+                <div className="relative z-10 text-black dark:text-white">
+                    <ClickSpark
+                        sparkColor="#fff"
+                        sparkSize={10}
+                        sparkRadius={15}
+                        sparkCount={8}
+                        duration={400}
+                    >
+                        <div className="w-full">
+                            <PageHeader
+                                logo={dark ? LogoDark : LogoLight}
+                                title="My Profile"
+                                dark={dark}
+                                className="w-full"
+                            />
 
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-12">
-                            <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-start lg:ml-6 xl:ml-12">
-                                <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-                                    {profiles.map(profile => (
-                                        <div key={profile.id} className="mb-4 flex flex-col items-center gap-4">
-                                            <ProfileCard
-                                                profile={{
-                                                    profilePicture: profile.avatar || ProfileImg,
-                                                    name: fullNameWithInitial(profile.firstname, profile.middlename, profile.lastname),
-                                                    age: calculateAge(profile.birthdate),
-                                                    position: capitalizeName(profile.job_title),
-                                                    location: completeAddress(profile.address),
-                                                    social: {
-                                                        linkedin: 'https://www.linkedin.com/in/jomswick/',
-                                                        github: 'https://github.com/JomsWick',
-                                                        discord: 'https://discord.com/users/538617488439771146'
-                                                    }
-                                                }}
-                                                dark={dark}
-                                            />
-
-                                            <SkillsCard skills={profile.skills} dark={dark} />
-                                            <div className="w-full flex justify-center">
-                                                <ActionBtn
-                                                    type="teal"
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 sm:px-6 lg:px-12">
+                                <div className="md:col-span-4 lg:col-span-3 flex justify-center md:justify-start lg:ml-6 xl:ml-12">
+                                    <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                                        {profiles.map(profile => (
+                                            <div key={profile.id} className="mb-4 flex flex-col items-center gap-4">
+                                                <ProfileCard
+                                                    profile={{
+                                                        profilePicture: profile.avatar || ProfileImg,
+                                                        name: fullNameWithInitial(profile.firstname, profile.middlename, profile.lastname),
+                                                        age: calculateAge(profile.birthdate),
+                                                        position: capitalizeName(profile.job_title),
+                                                        location: completeAddress(profile.address),
+                                                        social: {
+                                                            linkedin: 'https://www.linkedin.com/in/jomswick/',
+                                                            github: 'https://github.com/JomsWick',
+                                                            discord: 'https://discord.com/users/538617488439771146'
+                                                        }
+                                                    }}
                                                     dark={dark}
-                                                    className="
-                                                        w-full
-                                                        sm:w-[82%]
-                                                        md:w-[95%]
-                                                        lg:w-[95%]
-                                                        xl:w-[90%]
-                                                        2xl:w-[74%]
-                                                        3xl:w-[85%]
-                                                        text-xs sm:text-sm px-3 sm:px-5 py-2
-                                                    "
-                                                >
-                                                    Hire Me
-                                                </ActionBtn>
+                                                />
+
+                                                <SkillsCard skills={profile.skills} dark={dark} />
+                                                <div className="w-full flex justify-center">
+                                                    <ActionBtn
+                                                        type="teal"
+                                                        dark={dark}
+                                                        className="
+                                                            w-full
+                                                            sm:w-[82%]
+                                                            md:w-[95%]
+                                                            lg:w-[95%]
+                                                            xl:w-[90%]
+                                                            2xl:w-[74%]
+                                                            3xl:w-[85%]
+                                                            text-xs sm:text-sm px-3 sm:px-5 py-2
+                                                            cursor-target
+                                                        "
+                                                    >
+                                                        Hire Me
+                                                    </ActionBtn>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="md:col-span-8 lg:col-span-9 mb-4">
+                                    <TabGroup
+                                        tabClassName="py-3 border-b text-xs sm:text-sm md:text-base lg:text-lg"
+                                        contentClassName=""
+                                        contents={[
+                                            { title: <MenuTitle icon={FaRegFileAlt}>Overview</MenuTitle>, content: <Overview profile={profiles[0]} dark={dark} /> },
+                                            { title: <MenuTitle icon={FaRegUser}>Profile</MenuTitle>, content: <Profile profile={profiles[0]} dark={dark} /> },
+                                            { title: <MenuTitle icon={FaGraduationCap}>Education</MenuTitle>, content: <Education data={data} dark={dark} loading={!data} /> },
+                                            { title: <MenuTitle icon={FaBriefcase}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} dark={dark} /> },
+                                            { title: <MenuTitle icon={FaRegImages}>Portfolio</MenuTitle>, content: <Portfolio data={data} loading={!data} dark={dark} /> },
+                                        ]}
+                                        dark={dark}
+                                    />
                                 </div>
                             </div>
-
-                            <div className="md:col-span-8 lg:col-span-9 mb-4">
-                                <TabGroup
-                                    tabClassName="py-3 border-b text-xs sm:text-sm md:text-base lg:text-lg"
-                                    contentClassName=""
-                                    contents={[
-                                        { title: <MenuTitle icon={FaRegFileAlt}>Overview</MenuTitle>, content: <Overview profile={profiles[0]} dark={dark} /> },
-                                        { title: <MenuTitle icon={FaRegUser}>Profile</MenuTitle>, content: <Profile profile={profiles[0]} dark={dark} /> },
-                                        { title: <MenuTitle icon={FaGraduationCap}>Education</MenuTitle>, content: <Education data={data} dark={dark} loading={!data} /> },
-                                        { title: <MenuTitle icon={FaBriefcase}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} dark={dark} /> },
-                                        { title: <MenuTitle icon={FaRegImages}>Portfolio</MenuTitle>, content: <Portfolio data={data} loading={!data} dark={dark} /> },
-                                    ]}
-                                    dark={dark}
-                                />
-                            </div>
+                            <Footer profile={profiles[0]} dark={dark} />
                         </div>
-                        <Footer profile={profiles[0]} dark={dark} />
-                    </div>
-                </ClickSpark>
+                    </ClickSpark>
+                </div>
             </div>
-        </div>
         </AppLayout>
     );
 };

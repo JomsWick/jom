@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import FlatIcon from './components/icons/FlatIcon';
 import Maintenance from './pages/Maintenance';
 import NotFound from './pages/NotFound';
+import TargetCursor from './components/cursor/TargetCursor';
 
 function App() {
   const [dark, setDark] = useState(false);
@@ -21,6 +22,12 @@ function App() {
 
   return (
     <>
+      <TargetCursor
+        spinDuration={2}
+        hideDefaultCursor
+        parallaxOn
+        hoverDuration={0.2}
+      />
       <div className="fixed 
           top-3 right-3
           sm:top-4 sm:right-4
