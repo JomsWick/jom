@@ -42,7 +42,11 @@
         "inspire": "The thrill of solving puzzles and creating tools that genuinely improve lives keeps me motivated. Every line of code I write is a step toward smarter, more intuitive technology.",
         "work_best": "I thrive in collaborative environments where ideas flow freely and respect is mutual. Guided by curiosity and a thoughtful approach, I enjoy turning challenges into elegant, reliable solutions.",
         "personality": "I am naturally analytical and strategic, with a passion for continuous learning. This mindset helps me solve problems methodically while staying open to new ideas and innovations.",
-        "mbti": "intj-t",
+        "personality_mbti": {
+            "type": "INTJ-T",
+            "result": "Architect / Mastermind",
+            "description": "The INTJ-T (Turbulent Architect/Mastermind) is an analytical, strategic, and perfectionist personality driven by a need for self-improvement and intellectual mastery."
+        },
         "extras": {
             "availability": {
                 "availabilityText": "I’m available on weekdays from 9am to 5pm",
@@ -70,6 +74,11 @@
                 "Coffee enthusiast",
                 "Always curious about AI and new tech",
                 "Loves puzzle-solving challenges"
+            ],
+            "languages": [
+                { "name": "English", "level": "Intermediate" },
+                { "name": "Filipino", "level": "Fluent" },
+                { "name": "Cebuano", "level": "Native" }
             ]
         },
         "work_experience": {
@@ -77,7 +86,7 @@
                 "position": "Software Engineer",
                 "year": "2024-03-18 - 2027-03-18",
                 "company": "Global Telemedicine Corporation",
-                "description": ""
+                "description": "test"
             },
             "recent": {
                 "position": "Technical Support",

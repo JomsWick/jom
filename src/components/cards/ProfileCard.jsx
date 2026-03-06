@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaDiscord } from 'react-icons/fa';
 import SocialIcon from '../icons/SocialIcon';
+import ShinyText from '../labels/ShinyText';
 
 const ProfileCard = ({ profile, dark }) => {
     const {
@@ -39,7 +40,7 @@ const ProfileCard = ({ profile, dark }) => {
             </div>
 
             <h2 className={`text-xl font-semibold mb-1 ${dark ? 'text-white' : 'text-gray-800'}`}>
-                {name} {age && <span className={`text-sm ${dark ? 'text-gray-300' : 'text-gray-500'}`}>({age})</span>}
+                <ShinyText>{name}</ShinyText> {age && <span className={`text-sm ${dark ? 'text-gray-300' : 'text-gray-500'}`}>({age})</span>}
             </h2>
 
             {position && (

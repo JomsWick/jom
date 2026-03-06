@@ -30,7 +30,7 @@ const SkillsCard = ({ skills, dark }) => {
                                 <span
                                     key={sidx}
                                     className={`px-3 py-1 rounded-full text-xs font-medium
-                                        ${dark ? 'bg-teal-600/50 text-white' : 'bg-slate-50/80 text-teal-800'}`}
+                                        ${dark ? 'bg-teal-600/50 text-white' : 'bg-slate-100/85 text-teal-800'}`}
                                 >
                                     {skill}
                                 </span>

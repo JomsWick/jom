@@ -131,7 +131,7 @@ const Home = ({ dark }) => {
                                             { title: <MenuTitle icon={FaRegFileAlt}>Overview</MenuTitle>, content: <Overview profile={profiles[0]} dark={dark} /> },
                                             { title: <MenuTitle icon={FaRegUser}>Profile</MenuTitle>, content: <Profile profile={profiles[0]} dark={dark} /> },
                                             { title: <MenuTitle icon={FaGraduationCap}>Education</MenuTitle>, content: <Education data={data} dark={dark} loading={!data} /> },
-                                            { title: <MenuTitle icon={FaBriefcase}>Experience</MenuTitle>, content: <Experience data={data} loading={!data} dark={dark} /> },
+                                            { title: <MenuTitle icon={FaBriefcase}>Experience</MenuTitle>, content: <Experience work_experience={profiles[0].work_experience} loading={!data} dark={dark} /> },
                                             { title: <MenuTitle icon={FaRegImages}>Portfolio</MenuTitle>, content: <Portfolio data={data} loading={!data} dark={dark} /> },
                                         ]}
                                         dark={dark}

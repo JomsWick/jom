@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 import FlatIcon from "../icons/FlatIcon";
 import { Tab } from "@headlessui/react";
 import { useScreenSize } from "@/hooks/useScreenSize";
+import MobileDropdown from "../select/MobileDropdown";
 
 const LeftArrow = ({ className, dark, visible }) => {
 	const { isFirstItemVisible, scrollPrev } =
@@ -90,7 +91,7 @@ const TabGroup = ({
 		}, 3000);
 	};
 
-	return (
+	return !isMobile ? (		
 		<Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
 			<Tab.List
 				as="div"
@@ -194,19 +195,32 @@ const TabGroup = ({
 						}}
 					>
 						<Fade triggerOnce>
-                            {
-                                typeof content == "function"
-                                ? content({
-                                        selectedIndex: selectedIndex,
-                                        setSelectedIndex: setSelectedIndex,
-                                })
-                                : content
-                            }
-                        </Fade>
+							{
+								typeof content == "function"
+								? content({
+										selectedIndex: selectedIndex,
+										setSelectedIndex: setSelectedIndex,
+								})
+								: content
+							}
+						</Fade>
 					</Tab.Panel>
 				))}
 			</Tab.Panels>
 		</Tab.Group>
+	) : ( 
+		<>
+			<MobileDropdown
+				contents={contents}
+				selectedIndex={selectedIndex}
+				setSelectedIndex={setSelectedIndex}
+			/>
+			<div className="mt-3">
+				{typeof contents[selectedIndex].content === "function"
+					? contents[selectedIndex].content({ selectedIndex, setSelectedIndex })
+					: contents[selectedIndex].content}
+			</div>
+		</>
 	);
 };
 

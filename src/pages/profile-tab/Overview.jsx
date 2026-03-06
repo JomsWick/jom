@@ -16,25 +16,33 @@ const Overview = ({ profile, dark }) => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-6 shadow-sm p-5 rounded-xl bg-white dark:bg-gray-800/5">
                     <Section id="overview" className="">
-                        <h5 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                            About Me
-                        </h5>
-                        <ReadMore text={profile?.about_me} />
+                        <HeadingTitle level={5} title="About Me" className="" />
+                        <ReadMore 
+                            className="text-sm sm:text-base"
+                            buttonClassName="sm:text-sm md:text-base"
+                            text={profile?.about_me} 
+                        />
 
-                        <h5 className="text-xl font-semibold mt-6 mb-2 text-gray-900 dark:text-white">
-                            What Inspires Me
-                        </h5>
-                        <ReadMore text={profile?.inspire} />
+                        <HeadingTitle level={5} title="What Inspire Me" className="mt-4" />
+                        <ReadMore 
+                            className="text-sm sm:text-base"
+                            buttonClassName="sm:text-sm md:text-base"
+                            text={profile?.inspire} 
+                        />
 
-                        <h5 className="text-xl font-semibold mt-6 mb-2 text-gray-900 dark:text-white">
-                            How I Work Best
-                        </h5>
-                        <ReadMore text={profile?.work_best} />
+                        <HeadingTitle level={5} title="How I Work Best" className="mt-4" />
+                        <ReadMore 
+                            className="text-sm sm:text-base"
+                            buttonClassName="sm:text-sm md:text-base"
+                            text={profile?.work_best} 
+                        />
 
-                        <h5 className="text-xl font-semibold mt-6 mb-2 text-gray-900 dark:text-white">
-                            My Personality / Approach
-                        </h5>
-                        <ReadMore text={profile?.personality} />
+                        <HeadingTitle level={5} title="My Approach" className="mt-4" />
+                        <ReadMore 
+                            className="text-sm sm:text-base"
+                            buttonClassName="sm:text-sm md:text-base"
+                            text={profile?.personality} 
+                        />
                     </Section>
                 </div>
                 
@@ -42,7 +50,7 @@ const Overview = ({ profile, dark }) => {
                     <div className="flex items-center p-5 bg-white dark:bg-gray-800/5 rounded-lg shadow hover:shadow-md transition-shadow">
                         <div className="p-3 bg-teal-100 dark:bg-teal-900 rounded-full">
                             <svg
-                                className="w-6 h-6 text-teal-500 dark:text-teal-300"
+                                className="w-6 h-6 text-teal-500 dark:text-white"
                                 fill="none"
                                 stroke="currentColor"
                                     strokeWidth="2"
@@ -53,11 +61,11 @@ const Overview = ({ profile, dark }) => {
                             </svg>
                         </div>
                         <div className="ml-4">
-                        <h6 className="font-semibold text-gray-900/5 dark:text-white">Availability</h6>
+                        <h6 className="font-semibold text-gray-900 dark:text-white">Availability</h6>
                         <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{profile?.extras?.availability?.availabilityDetails}</p>
                         </div>
                          <div className="flex flex-col items-center justify-center w-16 h-16 px-4 sm:p-x1 mx-0.5 bg-teal-100 dark:bg-teal-900 rounded-lg shadow">
-                            <span className="text-xs text-teal-600 dark:teal-blue-300 uppercase">{new Date().toLocaleString('default', { month: 'short' })}</span>
+                            <span className="text-xs text-teal-600 dark:teal-blue-300 dark:text-white uppercase">{new Date().toLocaleString('default', { month: 'short' })}</span>
                             <span className="text-xl font-bold text-teal-800 dark:text-white">{new Date().getDate()}</span>
                         </div>
                     </div>
@@ -117,7 +125,7 @@ const Overview = ({ profile, dark }) => {
                                 {profile?.extras?.sports.map((sport, idx) => (
                                     <span
                                         key={idx}
-                                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 rounded-full text-sm font-medium"
+                                        className="px-3 py-1 bg-gray-100 dark:bg-gray-900 text-gray-500 dark:text-gray-300 rounded-full text-sm font-medium"
                                     >
                                         {sport}
                                     </span>
@@ -127,20 +135,48 @@ const Overview = ({ profile, dark }) => {
                     </div>
 
                     <div className="p-5 bg-white dark:bg-gray-800/5 rounded-lg shadow">
-                        <h6 className="font-semibold text-gray-900 dark:text-white mb-3">Fun Facts</h6>
-                        {profile?.extras?.funFacts?.length > 0 ? (
-                            <PieChart
-                            title="Fun Facts"
-                            data={{
-                                day: profile.extras.funFacts.map(f => ({ status: f, count: 1 })),
-                                week: profile.extras.funFacts.map(f => ({ status: f, count: 1 })),
-                                month: profile.extras.funFacts.map(f => ({ status: f, count: 1 })),
-                                year: profile.extras.funFacts.map(f => ({ status: f, count: 1 })),
-                            }}
-                            />
-                        ) : (
-                            <p className="text-gray-400 dark:text-gray-500">No fun facts available.</p>
-                        )}
+                        <div className="grid grid-cols-12 md:grid-cols-12 gap-6">
+                            <div className="col-span-4">
+                                <HeadingTitle title="Languages" />
+                                {profile?.extras?.languages?.length > 0 ? (
+                                    <div className="space-y-1">
+                                        {profile?.extras?.languages.map((lang, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="flex justify-between text-sm text-gray-600 dark:text-gray-300"
+                                            >
+                                                <span>{lang?.name}</span>
+                                                <span>{lang?.level}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-gray-400 dark:text-gray-500">No languages data available.</p>
+                                )}
+                            </div>
+
+                            {profile?.personality_mbti && (
+                                <div className="col-span-8 p-5 bg-white dark:bg-transparent">
+                                    <div className="flex items-center gap-3">
+                                        <HeadingTitle title="MBTI Personality" className="-mt-4" />
+                                    </div>
+
+                                    <div className="flex gap-4">
+                                        <div className="w-22 px-4 py-2 -my-2 bg-teal-100 dark:bg-teal-900 rounded-full text-teal-800 dark:text-white font-bold">
+                                            {profile.personality_mbti.type}
+                                        </div>
+                                        <div className="text-gray-600 dark:text-gray-300">
+                                            <p className="font-semibold">{profile.personality_mbti.result}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col text-sm sm:flex-row items-start sm:items-center gap-4 mt-4">
+                                        <div className="text-gray-600 dark:text-gray-300">
+                                            <p className="mt-1">{profile.personality_mbti.description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
